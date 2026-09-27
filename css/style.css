@@ -1,0 +1,90 @@
+/* ===== BASIC RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  background: #0b1220; /* dark navy crypto vibe */
+  color: #e5e7eb;
+  padding: 15px;
+}
+
+/* ===== TITLE ===== */
+h1 {
+  text-align: center;
+  color: #00d4ff; /* cyan crypto */
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* ===== NAV ===== */
+.nav-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.nav-bar a {
+  padding: 6px 10px;
+  background: #111a2e;
+  border: 1px solid #1f2a44;
+  color: #cbd5e1;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.nav-bar a:hover {
+  border-color: #00d4ff;
+  color: #00d4ff;
+}
+
+/* ===== CARD ===== */
+.card,
+.card-clean {
+  background: #111a2e;
+  border: 1px solid #1f2a44;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+/* ===== TEXT VALUE STYLE (CRYPTO FEEL) ===== */
+span {
+  color: #00ffb3; /* hijau crypto */
+  font-weight: bold;
+}
+
+/* ===== TABLE ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+th, td {
+  border: 1px solid #1f2a44;
+  padding: 6px;
+  text-align: center;
+}
+
+th {
+  background: #0f172a;
+  color: #00d4ff;
+}
+
+/* ===== HOVER SIMPLE ===== */
+tr:hover {
+  background: #0f1b33;
+}
+
+/* ===== CANVAS ===== */
+canvas {
+  width: 100% !important;
+  margin-top: 10px;
+}
