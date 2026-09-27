@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Ikan</title>
+  <link rel="stylesheet" href="css/hargastyle.css">
+</head>
+<body>
+
+  <h1>Input Perubahan / Update Harga</h1>
+
+  <form id="formharga">
+    <label>Nama Ikan:</label>
+    <input type="text" id="jenis" placeholder="misal: belut" required>
+
+    <label>Harga Beli (Rp):</label>
+    <input type="number" id="hargabeli" placeholder="40000" required>
+
+    <label>Harga Jual (Rp):</label>
+    <input type="number" id="hargajual" placeholder="70000" required>
+
+    <button type="submit">Simpan Harga</button>
+  </form>
+
+  <h1>Data Harga Beli & Jual Ikan</h1>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Nama Ikan</th>
+        <th>Harga Beli</th>
+        <th>Harga Jual</th>
+        <th>Laba</th>
+        <th>Margin</th>
+        <th>Markup</th>
+        <th>Tanggal Update</th>
+      </tr>
+    </thead>
+    <tbody id="tabeldata"></tbody>
+  </table>
+
+  <script type="module" src="js/harga.js"></script>
+
+</body>
+</html>
