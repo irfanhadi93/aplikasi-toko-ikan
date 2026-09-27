@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toko Ikan</title>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+  <!-- CSS eksternal -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h1>Arus Keuangan Toko Ikan</h1>
+
+  <!-- Navigasi -->
+  <nav class="nav-bar">
+    <a href="aset.html">Aset</a>
+    <a href="beli.html">Pembelian</a>
+    <a href="jual.html">Penjualan</a>
+    <a href="pengeluaran.html">Pengeluaran</a>
+    <a href="stok.html">Stok</a>
+    <a href="rata-rata.html">Rata-rata</a>
+    <a href="saldo.html">Saldo</a>
+    <a href="harga.html">Harga</a>
+    <a href="laba.html">Laba</a>
+    
+  </nav>
+
+  <!-- Ringkasan -->
+  <div class="card-clean">
+    <h3>Penjualan Hari Ini: <span id="penjualanhariini">Rp0</span></h3>
+    <h3>Laba Hari Ini: <span id="labahariini">Rp0</span></h3>
+    <h3>Saldo Toko: <span id="saldotoko">Rp0</span></h3>
+    <h3>Pengeluaran Hari Ini: <span id="pengeluaranhariini">Rp0</span></h3>
+  </div>
+
+ <!-- Card Grafik -->
+  <div class="card">
+    <h3>Grafik Arus Keuangan</h3>
+    <canvas id="grafikSemua" width="900" height="1000"></canvas>
+  </div>
+  
+  <!-- Riwayat Pembelian -->
+  <div class="card">
+    <h3>Riwayat Pembelian</h3>
+    <table id="riwayatPembelian" border="1" cellspacing="0" cellpadding="5">
+      <thead>
+        <tr>
+          <th>Tanggal</th>
+          <th>Item</th>
+          <th>Jumlah (Kg)</th>
+          <th>Total (Rp)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data pembelian akan diisi lewat JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Riwayat Penjualan -->
+  <div class="card">
+    <h3>Riwayat Penjualan</h3>
+    <table id="riwayatPenjualan" border="1" cellspacing="0" cellpadding="5">
+      <thead>
+        <tr>
+          <th>Tanggal</th>
+          <th>Item</th>
+          <th>Jumlah (Kg)</th>
+          <th>Total (Rp)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data penjualan akan diisi lewat JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Riwayat Pengeluaran -->
+  <div class="card">
+    <h3>Riwayat Pengeluaran</h3>
+    <table id="riwayatpengeluaran" border="1" cellspacing="0" cellpadding="5">
+      <thead>
+        <tr>
+          <th>Tanggal</th>
+          <th>Pengeluaran</th>
+          <th>Total (Rp)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data pengeluaran akan diisi lewat JS -->
+      </tbody>
+    </table>
+  </div>
+
+<div class="card">
+  <h3>💰 Laba Per Ikan</h3>
+  <table id="labaPerIkan">
+    <thead>
+      <tr>
+        <th>tgl</th>
+        <th>belut/gabus</th>
+        <th>jumlah (kg)</th>
+        <th>total(Rp)</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+  <!-- Script eksternal -->
+  <script type="module" src="js/tokobelut.js"></script>
+  <script type="module" src="js/grafik.js"></script>
+</body>
+</html>

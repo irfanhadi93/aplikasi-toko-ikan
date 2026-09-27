@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catatan Pengeluaran</title>
+  <link rel="stylesheet" href="css/pengeluaranstyle.css">
+</head>
+<body>
+  <h1>Catatan Pengeluaran</h1>
+
+  <!-- Form Input -->
+  <form id="formpengeluaran">
+    <label>Nama Pengeluaran:</label><br>
+    <input type="text" name="pengeluaran" placeholder="Contoh: Plastik" required><br><br>
+
+    <label>Jumlah Pengeluaran (Rp):</label><br>
+    <input type="number" name="uang" placeholder="0" required><br><br>
+
+    <input type="submit" value="Tambah Pengeluaran">
+  </form>
+
+  <!-- Grafik -->
+  <div class="container">
+    <h2>Grafik Pengeluaran Harian</h2>
+    <canvas id="grafikpengeluaran"></canvas>
+  </div>
+
+  <!-- Tabel Riwayat -->
+  <h2>Riwayat Pengeluaran</h2>
+  <table border="1" cellspacing="0" cellpadding="5" width="100%">
+    <thead>
+      <tr>
+        <th>Tanggal</th>
+        <th>Pengeluaran</th>
+        <th>Jumlah (Rp)</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody id="riwayatpengeluaran"></tbody>
+  </table>
+
+  <!-- Ringkasan -->
+  <h2>Pengeluaran Hari Ini: <span id="pengeluaranhariini">Rp0</span></h2>
+  <h2>Pengeluaran Bulan Ini : <span id="pengeluaranbulanini">Rp0</span></h2>
+  <h2>Pengeluaran Tahun Ini : <span id="pengeluarantahunini">Rp0</span></h2>
+  <h3>Total Pengeluaran: <span id="totalpengeluaran">Rp0</span></h3>
+  <h3>Rata-rata Pengeluaran/hari : <span id="rata-ratapengeluaranharian">Rp0</span></h3>
+  <h3>Rata-rata Pengeluaran/bulan : <span id="rata-ratapengeluaranbulanan">Rp0</span></h3>
+  <h3>Rata-rata Pengeluaran/tahun : <span id="rata-ratapengeluarantahunan">Rp</span></h3>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+  <!-- Urutan module -->
+  <script type="module" src="js/pengeluaran.js"></script>
+  <script type="module" src="js/grafik-pengeluaran.js"></script>
+</body>
+</html>

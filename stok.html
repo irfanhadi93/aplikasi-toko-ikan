@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Stok Ikan</title>
+  <link rel="stylesheet" href="css/stokstyle.css">
+</head>
+<body>
+  <h1>Stok Ikan</h1>
+
+  <!-- Tabel Stok -->
+  <table border="1" cellpadding="5">
+    <thead>
+      <tr>
+        <th>Ikan</th>
+        <th>Stok (kg)</th>
+        <th>Harga Beli (Rp/kg)</th>
+        <th>Harga Jual (Rp/kg)</th>
+        <th>Nilai Stok(Rp)</th>
+        <th>Potensi Jual (Rp)</th>
+        <th>Laba Potensial (Rp)</th>
+        <th>hari ini</th>
+      </tr>
+    </thead>
+    <tbody id="tabelstok"></tbody>
+  </table>
+
+  <!--  grafik Stok -->
+  
+<div class="card">
+    <h2>Grafik stok ikan</h2>
+    <canvas id="grafikStok"></canvas>
+  </div>
+
+  <!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+<!-- Script modul -->
+<script type="module" src="js/stok.js"></script>
+<script type="module" src="js/grafik-stok.js"></script>
+</body>
+</html>

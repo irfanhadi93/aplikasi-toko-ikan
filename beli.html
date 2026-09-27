@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Catatan Pembelian Ikan</title>
+  <link rel="stylesheet" href="css/belistyle.css">
+</head>
+<body>
+  <h1>Catatan Pembelian Ikan</h1>
+  <p>Pembelian hari ini (<span id="tglhariini"></span>)</p>
+<p>Total pembelian hari ini: <span id="totalpembelianhariini">Rp 0</span></p>
+<p>Total pembelian: <span id="totalpembelian">Rp 0</span></p>
+
+  <form id="formpembelian">
+    <label>Nama Ikan:</label><br>
+    <select id="pilihikan" required>
+      <option value="">-- pilih ikan --</option>
+    </select><br><br>
+
+    <label>Pembelian (Rp):</label><br>
+    <input type="number" name="uang" placeholder="0" required><br><br>
+
+    <input type="submit" value="Tambah Pembelian">
+  </form>
+
+  <h2>Stok Kolam</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Nama Ikan</th>
+        <th>Stok (kg)</th>
+        <th>Harga Beli</th>
+        <th>Harga Jual</th>
+        <th>Nilai Stok</th>
+        <th>Potensi Jual</th>
+        <th>Potensi Laba</th>
+      </tr>
+    </thead>
+    <tbody id="tabelstok"></tbody>
+  </table>
+
+  <h2>Riwayat Pembelian</h2>
+  <ul id="riwayatpembelian"></ul>
+
+
+  <script type="module" src="js/beli.js"></script>
+</body>
+</html>

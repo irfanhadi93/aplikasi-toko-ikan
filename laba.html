@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Laba Toko Ikan</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<h1>💰 Laba Toko Ikan</h1>
+
+<!-- ===== SUMMARY ===== -->
+<div class="card">
+  <h3>Laba Total</h3>
+  <div id="labatotal" class="big">Rp0</div>
+</div>
+
+<div class="card">
+  <h3>Laba Hari Ini</h3>
+  <div id="labahariini" class="big">Rp0</div>
+</div>
+
+<div class="card">
+  <h3>Rata-rata laba/hari</h3>
+  <div id="rata-ratalabaharian" class="big">Rp0</div>
+</div>
+
+<div class="card">
+  <h3>Laba bulan ini</h3>
+  <div id="lababulanini" class="big">Rp0</div>
+</div>
+
+<div class="card">
+  <h3>Rata-rata laba/bulan</h3>
+  <div id="rata-ratalababulanan" class="big">Rp0</div>
+</div>
+
+<!-- 🔥 FIX: div ditutup dengan benar -->
+<div class="card">
+  <h3>Laba tahun ini</h3>
+  <div id="labatahunan" class="big">Rp0</div>
+</div>
+
+<div class="card">
+  <h3>Rata-rata laba/tahun</h3>
+  <div id="rata-ratalabatahunan" class="big">Rp0</div>
+</div>
+
+<div class="card">
+  <h3>Margin</h3>
+  <div id="margin" class="big">0</div>
+</div>
+
+<!-- ===== PER IKAN ===== -->
+<div class="card">
+  <h3>Laba Per Ikan Hari Ini</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Jenis</th>
+        <th>Kg Terjual</th>
+        <th>Untung / Kg</th>
+        <th>Total Laba</th>
+      </tr>
+    </thead>
+    <tbody id="labaperikanharian"></tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h3>Laba Per Ikan Bulan Ini</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Jenis</th>
+        <th>Kg Terjual</th>
+        <th>Untung / Kg</th>
+        <th>Total Laba</th>
+      </tr>
+    </thead>
+    <tbody id="labaperikanbulanan"></tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h3>Laba Per Ikan Tahun Ini</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Jenis</th>
+        <th>Kg Terjual</th>
+        <th>Untung / Kg</th>
+        <th>Total Laba</th>
+      </tr>
+    </thead>
+    <tbody id="labaperikantahunan"></tbody>
+  </table>
+</div>
+
+<!-- ===== RIWAYAT ===== -->
+<div class="card">
+  <h3>Riwayat Laba (10 terakhir)</h3>
+  
+  <!-- 🔥 FIX: tbody harus di dalam table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Tgl</th>
+        <th>Jenis</th>
+        <th>Kg Terjual</th>
+        <th>Total Laba</th>
+      </tr> 
+    </thead>
+    <tbody id="riwayatlaba"></tbody>
+  </table>
+
+</div>
+
+<script type="module" src="js/laba.js"></script>
+
+</body>
+</html>
