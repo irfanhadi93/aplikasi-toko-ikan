@@ -1,0 +1,92 @@
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  background: #0b1220;
+  color: #e5e7eb;
+  padding: 15px;
+}
+
+/* ===== TITLE ===== */
+h1 {
+  text-align: center;
+  color: #00d4ff;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+h2 {
+  color: #00d4ff;
+  margin-top: 20px;
+  font-size: 16px;
+  text-align: center;
+}
+
+h3 {
+  color: #cbd5e1;
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* ===== VALUE COLOR (IMPORTANT) ===== */
+span {
+  color: #00ffb3;
+  font-weight: bold;
+}
+
+/* ===== LIST ===== */
+ul {
+  list-style: none;
+  margin-top: 10px;
+  padding: 10px;
+  background: #111a2e;
+  border: 1px solid #1f2a44;
+  border-radius: 12px;
+}
+
+ul li {
+  padding: 8px;
+  border-bottom: 1px solid #1f2a44;
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+ul li:last-child {
+  border-bottom: none;
+}
+
+ul li:hover {
+  background: #0f1b33;
+}
+
+/* ===== CARD EFFECT (optional feel dashboard) ===== */
+h2, h3 {
+  background: #111a2e;
+  border: 1px solid #1f2a44;
+  border-radius: 10px;
+  padding: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 500px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  h2, h3 {
+    font-size: 13px;
+  }
+
+  ul li {
+    font-size: 12px;
+  }
+}

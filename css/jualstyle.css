@@ -1,0 +1,134 @@
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  background: #0b1220;
+  color: #e5e7eb;
+  padding: 15px;
+}
+
+/* ===== TITLE ===== */
+h1 {
+  text-align: center;
+  color: #00d4ff;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+/* ===== INFO TEXT ===== */
+p {
+  text-align: center;
+  margin: 4px 0;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+span {
+  color: #00ffb3;
+  font-weight: bold;
+}
+
+/* ===== FORM ===== */
+form {
+  background: #111a2e;
+  border: 1px solid #1f2a44;
+  padding: 14px;
+  border-radius: 12px;
+  margin: 15px 0;
+}
+
+/* label + input spacing */
+label {
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  background: #0f172a;
+  border: 1px solid #1f2a44;
+  border-radius: 8px;
+  color: #e5e7eb;
+}
+
+/* ===== BUTTON ===== */
+input[type="submit"] {
+  background: #00d4ff;
+  color: #001018;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s;
+}
+
+input[type="submit"]:hover {
+  background: #00ffb3;
+}
+
+/* ===== CHART CONTAINER ===== */
+.container {
+  background: #111a2e;
+  border: 1px solid #1f2a44;
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 15px;
+}
+
+/* ===== TABLE ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+th, td {
+  border: 1px solid #1f2a44;
+  padding: 6px;
+  text-align: center;
+}
+
+th {
+  background: #0f172a;
+  color: #00d4ff;
+}
+
+tr:hover {
+  background: #0f1b33;
+}
+
+/* ===== RIWAYAT LIST ===== */
+ul {
+  list-style: none;
+  margin-top: 10px;
+}
+
+ul li {
+  padding: 8px;
+  border-bottom: 1px solid #1f2a44;
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+ul li:hover {
+  background: #0f1b33;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  table {
+    font-size: 11px;
+  }
+}

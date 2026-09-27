@@ -1,0 +1,103 @@
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  background: #0b1220;
+  color: #e5e7eb;
+  padding: 15px;
+}
+
+/* ===== TITLE ===== */
+h1 {
+  text-align: center;
+  color: #00d4ff;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+/* ===== CARD ===== */
+.card {
+  background: #111a2e;
+  border: 1px solid #1f2a44;
+  border-radius: 12px;
+  padding: 14px;
+  margin-top: 15px;
+}
+
+/* ===== TABLE ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: #111a2e;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* header */
+th {
+  background: #0f172a;
+  color: #00d4ff;
+  padding: 8px;
+  border: 1px solid #1f2a44;
+  text-align: center;
+}
+
+/* isi */
+td {
+  padding: 7px;
+  border: 1px solid #1f2a44;
+  text-align: center;
+  color: #cbd5e1;
+}
+
+/* hover effect seperti trading grid */
+tr:hover {
+  background: #0f1b33;
+}
+
+/* ===== VALUE COLOR ===== */
+td:nth-child(2) {
+  color: #00ffb3; /* stok hijau */
+  font-weight: bold;
+}
+
+/* laba kolom terakhir */
+td:nth-child(7) {
+  color: #00d4ff;
+  font-weight: bold;
+}
+
+/* ===== CHART ===== */
+canvas {
+  width: 100% !important;
+  height: 320px !important;
+  margin-top: 10px;
+}
+
+/* ===== CARD TITLE ===== */
+h2 {
+  text-align: center;
+  color: #cbd5e1;
+  margin-bottom: 8px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  table {
+    font-size: 11px;
+  }
+
+  th, td {
+    padding: 5px;
+  }
+}

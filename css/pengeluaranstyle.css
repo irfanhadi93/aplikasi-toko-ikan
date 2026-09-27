@@ -1,0 +1,115 @@
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  background: #0b1220;
+  color: #e5e7eb;
+  padding: 15px;
+}
+
+/* ===== TITLE ===== */
+h1 {
+  text-align: center;
+  color: #00d4ff;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+/* ===== SUB TEXT ===== */
+h2, h3 {
+  text-align: center;
+  margin-top: 10px;
+  color: #cbd5e1;
+}
+
+span {
+  color: #00ffb3;
+  font-weight: bold;
+}
+
+/* ===== FORM ===== */
+form {
+  background: #111a2e;
+  border: 1px solid #1f2a44;
+  padding: 14px;
+  border-radius: 12px;
+  margin: 15px 0;
+}
+
+label {
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  background: #0f172a;
+  border: 1px solid #1f2a44;
+  border-radius: 8px;
+  color: #e5e7eb;
+}
+
+/* ===== BUTTON ===== */
+input[type="submit"] {
+  background: #00d4ff;
+  color: #001018;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s;
+}
+
+input[type="submit"]:hover {
+  background: #00ffb3;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  background: #111a2e;
+  border: 1px solid #1f2a44;
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 15px;
+}
+
+/* ===== TABLE ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+th, td {
+  border: 1px solid #1f2a44;
+  padding: 6px;
+  text-align: center;
+}
+
+th {
+  background: #0f172a;
+  color: #00d4ff;
+}
+
+tr:hover {
+  background: #0f1b33;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  table {
+    font-size: 11px;
+  }
+}
