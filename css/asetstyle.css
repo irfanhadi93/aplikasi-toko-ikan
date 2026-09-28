@@ -1,4 +1,7 @@
-/* ===== RESET ===== */
+/* ======================================================
+   RESET
+====================================================== */
+
 * {
   margin: 0;
   padding: 0;
@@ -6,71 +9,347 @@
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
+
+/* ======================================================
+   BODY
+====================================================== */
+
 body {
-  background: #0b1220; /* dark crypto vibe */
+  background: #0b1220;
   color: #e5e7eb;
   padding: 15px;
 }
 
-/* ===== TITLE ===== */
+
+/* ======================================================
+   TITLE
+====================================================== */
+
 h1 {
   text-align: center;
   color: #00d4ff;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
+  font-size: 22px;
   font-weight: 600;
 }
 
-/* ===== CARD ===== */
+
+/* ======================================================
+   CARD
+====================================================== */
+
 .card {
   background: #111a2e;
   border: 1px solid #1f2a44;
   border-radius: 12px;
-  padding: 14px;
-  margin-bottom: 12px;
+  padding: 15px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.18);
 }
 
-/* ===== TEXT INSIDE CARD ===== */
-h3 {
-  margin: 8px 0;
+
+/* ======================================================
+   JUDUL CARD
+====================================================== */
+
+.card h2 {
+  color: #00d4ff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 13px;
+}
+
+
+/* ======================================================
+   RINGKASAN
+====================================================== */
+
+.card p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 0;
+
+  border-bottom: 1px solid #1f2a44;
+
   font-size: 14px;
-  font-weight: 500;
   color: #cbd5e1;
 }
 
-/* ===== VALUE (SPAN STYLE) ===== */
-span {
-  color: #00ffb3; /* crypto green */
-  font-weight: bold;
+
+.card p:last-child {
+  border-bottom: none;
 }
 
-/* ===== LIST STOK ===== */
+
+.card p strong {
+  color: #00ffb3;
+  font-weight: 600;
+  text-align: right;
+}
+
+
+/* ======================================================
+   TOTAL ASET
+====================================================== */
+
+#totalAset {
+  color: #00d4ff;
+  font-size: 17px;
+}
+
+
+/* ======================================================
+   TABEL
+====================================================== */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 750px;
+}
+
+
+/* HEADER */
+
+thead {
+  background: #0b1529;
+}
+
+
+th {
+  padding: 11px 10px;
+
+  border-bottom: 1px solid #263653;
+
+  color: #00d4ff;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  text-align: left;
+
+  white-space: nowrap;
+}
+
+
+/* ISI */
+
+td {
+  padding: 10px;
+
+  border-bottom: 1px solid #1f2a44;
+
+  color: #cbd5e1;
+
+  font-size: 12px;
+
+  white-space: nowrap;
+}
+
+
+/* BARIS */
+
+tbody tr {
+  transition: background 0.15s ease;
+}
+
+
+tbody tr:hover {
+  background: #0f1b33;
+}
+
+
+/* ======================================================
+   ANGKA TABEL
+====================================================== */
+
+td:nth-child(n+2) {
+  text-align: right;
+}
+
+
+/* ======================================================
+   KOLOM JENIS
+====================================================== */
+
+td:first-child {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+
+/* ======================================================
+   POTENSI LABA
+====================================================== */
+
+td:last-child {
+  color: #00ffb3;
+  font-weight: 600;
+}
+
+
+/* ======================================================
+   TABEL EMPTY / LOADING
+====================================================== */
+
+#tabelAset td[colspan] {
+  text-align: center;
+  color: #94a3b8;
+  padding: 20px;
+}
+
+
+/* ======================================================
+   LIST STOK
+====================================================== */
+
 ul {
   list-style: none;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
+
 ul li {
-  padding: 8px;
+  padding: 10px 8px;
+
   border-bottom: 1px solid #1f2a44;
+
   font-size: 13px;
+
   color: #cbd5e1;
+
+  line-height: 1.5;
 }
+
+
+ul li:last-child {
+  border-bottom: none;
+}
+
 
 ul li:hover {
   background: #0f1b33;
 }
 
-/* ===== RESPONSIVE ===== */
+
+/* ======================================================
+   SCROLL TABEL DI HP
+====================================================== */
+
+.card > div {
+  scrollbar-width: thin;
+  scrollbar-color: #263653 #0b1220;
+}
+
+
+.card > div::-webkit-scrollbar {
+  height: 7px;
+}
+
+
+.card > div::-webkit-scrollbar-track {
+  background: #0b1220;
+  border-radius: 10px;
+}
+
+
+.card > div::-webkit-scrollbar-thumb {
+  background: #263653;
+  border-radius: 10px;
+}
+
+
+/* ======================================================
+   RESPONSIVE HP
+====================================================== */
+
 @media (max-width: 600px) {
+
   body {
     padding: 10px;
   }
 
-  h3 {
+
+  h1 {
+    font-size: 20px;
+    margin-bottom: 14px;
+  }
+
+
+  .card {
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+
+  .card h2 {
+    font-size: 15px;
+  }
+
+
+  .card p {
+    font-size: 13px;
+    padding: 9px 0;
+  }
+
+
+  .card p strong {
     font-size: 13px;
   }
 
+
+  table {
+    min-width: 750px;
+  }
+
+
+  th {
+    font-size: 11px;
+    padding: 9px 8px;
+  }
+
+
+  td {
+    font-size: 11px;
+    padding: 9px 8px;
+  }
+
+
   ul li {
     font-size: 12px;
+    padding: 9px 6px;
   }
+
+}
+
+
+/* ======================================================
+   HP SANGAT KECIL
+====================================================== */
+
+@media (max-width: 380px) {
+
+  body {
+    padding: 8px;
+  }
+
+
+  h1 {
+    font-size: 18px;
+  }
+
+
+  .card {
+    padding: 10px;
+  }
+
+
+  .card p {
+    font-size: 12px;
+  }
+
 }
