@@ -1,28 +1,144 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
   <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>Dashboard Total Aset</title>
-  <link rel="stylesheet" href="css/asetstyle.css">
+
+  <link
+    rel="stylesheet"
+    href="css/asetstyle.css"
+  >
+
 </head>
+
+
 <body>
+
   <h1>Dashboard Total Aset</h1>
 
-  <!-- Card ringkas untuk total -->
+
+  <!-- ==================================================
+       RINGKASAN
+  ================================================== -->
+
   <div class="card">
-    <h3>Saldo Toko: <span id="saldoToko">-</span></h3>
-    <h3>Total Stok Kolam:  <span id="totalStok">- </span></h3>
-    <h3>Total Potensi Jual Stok: <span id="totalPotensiJual">-</span></h3>
-    <h3>Total Aset: <span id="totalAset">-</span></h3>
+
+    <h2>Ringkasan Aset</h2>
+
+    <p>
+      Saldo Toko:
+      <strong id="saldoToko">-</strong>
+    </p>
+
+    <p>
+      Total Stok:
+      <strong id="totalStok">-</strong>
+    </p>
+
+    <p>
+      Total Potensi Jual:
+      <strong id="totalPotensiJual">-</strong>
+    </p>
+
+    <p>
+      Total Aset:
+      <strong id="totalAset">-</strong>
+    </p>
+
   </div>
 
-  <!-- Card ringkas untuk daftar stok -->
+
+  <!-- ==================================================
+       DETAIL STOK
+  ================================================== -->
+
   <div class="card">
-    <h3>Stok Kolam</h3>
-    <ul id="daftarStok"></ul>
+
+    <h2>Detail Stok Kolam</h2>
+
+    <div style="overflow-x:auto;">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Jenis</th>
+
+            <th>Stok</th>
+
+            <th>Modal / Kg</th>
+
+            <th>Nilai Modal</th>
+
+            <th>Jual / Kg</th>
+
+            <th>Potensi Jual</th>
+
+            <th>Potensi Laba</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="tabelAset">
+
+          <tr>
+
+            <td colspan="7">
+              Memuat data...
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
   </div>
 
- <script type="module" src="js/aset.js"></script>
-  
+
+  <!-- ==================================================
+       LIST STOK SEDERHANA
+  ================================================== -->
+
+  <div class="card">
+
+    <h2>Ringkasan Stok</h2>
+
+    <ul id="daftarStok">
+
+      <li>
+        Memuat data...
+      </li>
+
+    </ul>
+
+  </div>
+
+
+  <!-- ==================================================
+       JAVASCRIPT
+  ================================================== -->
+
+  <script
+    type="module"
+    src="js/aset.js"
+  ></script>
+
+
 </body>
+
 </html>
