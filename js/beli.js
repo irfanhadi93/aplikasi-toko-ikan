@@ -1,3 +1,7 @@
+// ======================================================
+// PEMBELIAN IKAN
+// ======================================================
+
 import { db } from "./firebase.js";
 
 import {
@@ -10,33 +14,71 @@ import {
 
 
 // ======================================================
+// NORMALISASI NAMA IKAN
+// ======================================================
+
+function normalisasiJenis(nama) {
+
+  return String(nama || "")
+    .trim()
+    .replace(/\s+/g, " ")
+    .toLowerCase();
+
+}
+
+
+// ======================================================
 // STORAGE
 // ======================================================
 
 function ambilHarga() {
+
   try {
-    return JSON.parse(localStorage.getItem("dataIkan")) || [];
+
+    return JSON.parse(
+      localStorage.getItem("dataIkan")
+    ) || [];
+
   } catch {
+
     return [];
+
   }
+
 }
 
 
 function ambilPembelian() {
+
   try {
-    return JSON.parse(localStorage.getItem("pembelianIkan")) || [];
+
+    return JSON.parse(
+      localStorage.getItem("pembelianIkan")
+    ) || [];
+
   } catch {
+
     return [];
+
   }
+
 }
 
 
 function ambilPenjualan() {
+
   try {
-    return JSON.parse(localStorage.getItem("penjualanIkan")) || [];
+
+    return JSON.parse(
+      localStorage.getItem("penjualanIkan")
+    ) || [];
+
   } catch {
+
     return [];
+
   }
+
 }
 
 
@@ -59,7 +101,9 @@ function ambilPendingDelete() {
   try {
 
     return JSON.parse(
-      localStorage.getItem("pendingDeletePembelian")
+      localStorage.getItem(
+        "pendingDeletePembelian"
+      )
     ) || [];
 
   } catch {
@@ -83,7 +127,9 @@ function simpanPendingDelete(data) {
 
 function tambahPendingDelete(id) {
 
-  let data = ambilPendingDelete();
+  let data =
+    ambilPendingDelete();
+
 
   if (!data.includes(id)) {
 
@@ -101,6 +147,7 @@ function hapusPendingDelete(id) {
   let data =
     ambilPendingDelete()
       .filter(x => x !== id);
+
 
   simpanPendingDelete(data);
 
@@ -146,7 +193,7 @@ function tanggal() {
 function buatID() {
 
   if (
-    crypto &&
+    typeof crypto !== "undefined" &&
     typeof crypto.randomUUID === "function"
   ) {
 
@@ -156,7 +203,9 @@ function buatID() {
 
   return (
     Date.now().toString(36) +
-    Math.random().toString(36).slice(2)
+    Math.random()
+      .toString(36)
+      .slice(2)
   );
 
 }
@@ -165,41 +214,80 @@ function buatID() {
 // ======================================================
 // DROPDOWN IKAN
 // ======================================================
+// Nama yang sama tetapi beda huruf/spasi
+// hanya muncul satu kali.
+// ======================================================
 
 function isiIkan() {
 
   let select =
-    document.getElementById("pilihikan");
+    document.getElementById(
+      "pilihikan"
+    );
+
 
   if (!select) return;
 
 
-  let data = ambilHarga();
+  let data =
+    ambilHarga();
 
 
-  let jenis =
-    [
-      ...new Set(
-        data
-          .map(x => x.jenis)
-          .filter(Boolean)
-      )
-    ];
+  let map =
+    new Map();
+
+
+  data.forEach(item => {
+
+    if (!item.jenis) return;
+
+
+    let nama =
+      String(item.jenis)
+        .trim()
+        .replace(/\s+/g, " ");
+
+
+    let key =
+      normalisasiJenis(nama);
+
+
+    if (!key) return;
+
+
+    // Simpan nama pertama yang rapi
+    if (!map.has(key)) {
+
+      map.set(
+        key,
+        nama
+      );
+
+    }
+
+  });
 
 
   select.innerHTML =
     '<option value="">-- pilih ikan --</option>';
 
 
-  jenis.forEach(x => {
+  map.forEach(nama => {
 
-    let o =
-      document.createElement("option");
+    let option =
+      document.createElement(
+        "option"
+      );
 
-    o.value = x;
-    o.textContent = x;
 
-    select.appendChild(o);
+    option.value = nama;
+
+    option.textContent = nama;
+
+
+    select.appendChild(
+      option
+    );
 
   });
 
@@ -209,17 +297,49 @@ function isiIkan() {
 // ======================================================
 // HARGA TERAKHIR
 // ======================================================
+// Semua variasi nama dianggap sama.
+//
+// Contoh:
+// Belut
+// belut
+// BELUT
+// " Belut "
+//
+// semuanya dicari sebagai:
+// belut
+//
+// Data terakhir yang ditemukan digunakan.
+// ======================================================
 
 function hargaTerakhir(jenis) {
 
+  let target =
+    normalisasiJenis(jenis);
+
+
   let data =
-    ambilHarga()
-      .filter(x => x.jenis === jenis);
+    ambilHarga();
 
 
-  return data.length
-    ? data[data.length - 1]
-    : null;
+  let terakhir =
+    null;
+
+
+  data.forEach(item => {
+
+    if (
+      normalisasiJenis(item.jenis)
+      === target
+    ) {
+
+      terakhir = item;
+
+    }
+
+  });
+
+
+  return terakhir;
 
 }
 
@@ -233,21 +353,34 @@ function hitungStok() {
   let hasil = {};
 
 
-  // --------------------------------------------------
+  // ====================================================
   // PEMBELIAN = STOK MASUK
-  // --------------------------------------------------
+  // ====================================================
 
   ambilPembelian()
     .forEach(item => {
 
-      let jenis = item.jenis;
+      let namaAsli =
+        String(item.jenis || "")
+          .trim()
+          .replace(/\s+/g, " ");
 
-      if (!jenis) return;
+
+      if (!namaAsli) return;
 
 
-      if (!hasil[jenis]) {
+      let key =
+        normalisasiJenis(
+          namaAsli
+        );
 
-        hasil[jenis] = {
+
+      // Gabungkan nama yang sama
+      if (!hasil[key]) {
+
+        hasil[key] = {
+
+          jenis: namaAsli,
 
           stok: 0,
 
@@ -272,25 +405,37 @@ function hitungStok() {
         Number(item.uang) || 0;
 
 
-      hasil[jenis].stok += berat;
+      hasil[key].stok +=
+        berat;
 
-      hasil[jenis].totalBeratBeli += berat;
 
-      hasil[jenis].totalModal += uang;
+      hasil[key].totalBeratBeli +=
+        berat;
+
+
+      hasil[key].totalModal +=
+        uang;
 
     });
 
 
-  // --------------------------------------------------
-  // HARGA MODAL RATA-RATA
-  // --------------------------------------------------
+  // ====================================================
+  // HARGA MODAL + HARGA JUAL TERBARU
+  // ====================================================
 
-  for (let jenis in hasil) {
+  for (let key in hasil) {
 
-    let i = hasil[jenis];
+    let i =
+      hasil[key];
 
 
-    if (i.totalBeratBeli > 0) {
+    // --------------------------------------------------
+    // MODAL RATA-RATA / KG
+    // --------------------------------------------------
+
+    if (
+      i.totalBeratBeli > 0
+    ) {
 
       i.beli =
         i.totalModal /
@@ -299,8 +444,14 @@ function hitungStok() {
     }
 
 
+    // --------------------------------------------------
+    // HARGA JUAL TERBARU
+    // --------------------------------------------------
+
     let harga =
-      hargaTerakhir(jenis);
+      hargaTerakhir(
+        i.jenis
+      );
 
 
     if (harga) {
@@ -313,39 +464,53 @@ function hitungStok() {
   }
 
 
-  // --------------------------------------------------
+  // ====================================================
   // PENJUALAN = STOK KELUAR
-  // --------------------------------------------------
+  // ====================================================
 
   ambilPenjualan()
     .forEach(item => {
 
-      let jenis = item.jenis;
+      let namaAsli =
+        String(item.jenis || "")
+          .trim()
+          .replace(/\s+/g, " ");
 
-      if (!hasil[jenis]) return;
+
+      if (!namaAsli) return;
+
+
+      let key =
+        normalisasiJenis(
+          namaAsli
+        );
+
+
+      if (!hasil[key]) return;
 
 
       let berat =
         Number(item.berat) || 0;
 
 
-      hasil[jenis].stok -= berat;
+      hasil[key].stok -=
+        berat;
 
     });
 
 
-  // --------------------------------------------------
+  // ====================================================
   // CEGAH ANGKA -0
-  // --------------------------------------------------
+  // ====================================================
 
-  for (let jenis in hasil) {
+  for (let key in hasil) {
 
     if (
-      hasil[jenis].stok > -0.0001 &&
-      hasil[jenis].stok < 0.0001
+      hasil[key].stok > -0.0001 &&
+      hasil[key].stok < 0.0001
     ) {
 
-      hasil[jenis].stok = 0;
+      hasil[key].stok = 0;
 
     }
 
@@ -364,7 +529,10 @@ function hitungStok() {
 function tampilStok() {
 
   let tabel =
-    document.getElementById("tabelstok");
+    document.getElementById(
+      "tabelstok"
+    );
+
 
   if (!tabel) return;
 
@@ -372,16 +540,21 @@ function tampilStok() {
   tabel.innerHTML = "";
 
 
-  let data = hitungStok();
+  let data =
+    hitungStok();
 
 
-  for (let jenis in data) {
+  for (let key in data) {
 
-    let i = data[jenis];
+    let i =
+      data[key];
 
 
     let stok =
-      Math.max(0, i.stok);
+      Math.max(
+        0,
+        i.stok
+      );
 
 
     let nilaiStok =
@@ -400,19 +573,33 @@ function tampilStok() {
       `
       <tr>
 
-        <td>${jenis}</td>
+        <td>
+          ${i.jenis}
+        </td>
 
-        <td>${stok.toFixed(2)} kg</td>
+        <td>
+          ${stok.toFixed(2)} kg
+        </td>
 
-        <td>${rupiah(i.beli)}</td>
+        <td>
+          ${rupiah(i.beli)}
+        </td>
 
-        <td>${rupiah(i.jual)}</td>
+        <td>
+          ${rupiah(i.jual)}
+        </td>
 
-        <td>${rupiah(nilaiStok)}</td>
+        <td>
+          ${rupiah(nilaiStok)}
+        </td>
 
-        <td>${rupiah(potensi)}</td>
+        <td>
+          ${rupiah(potensi)}
+        </td>
 
-        <td>${rupiah(laba)}</td>
+        <td>
+          ${rupiah(laba)}
+        </td>
 
       </tr>
       `;
@@ -450,7 +637,9 @@ function ringkasan() {
     semua += uang;
 
 
-    if (x.tanggal === hari) {
+    if (
+      x.tanggal === hari
+    ) {
 
       hariIni += uang;
 
@@ -460,7 +649,9 @@ function ringkasan() {
 
 
   let tgl =
-    document.getElementById("tglhariini");
+    document.getElementById(
+      "tglhariini"
+    );
 
 
   let totalHari =
@@ -477,7 +668,8 @@ function ringkasan() {
 
   if (tgl) {
 
-    tgl.textContent = hari;
+    tgl.textContent =
+      hari;
 
   }
 
@@ -524,7 +716,6 @@ function riwayat() {
     .reverse()
     .slice(0, 10)
     .forEach(x => {
-
 
       let berat =
         Number(x.berat) || 0;
@@ -577,15 +768,19 @@ window.hapusData =
 
 
     // ----------------------------------------------
-    // HAPUS DARI LOCAL TERLEBIH DAHULU
+    // HAPUS LOCAL TERLEBIH DAHULU
     // ----------------------------------------------
 
     let data =
       ambilPembelian()
-        .filter(x => x.id !== id);
+        .filter(
+          x => x.id !== id
+        );
 
 
-    simpanPembelian(data);
+    simpanPembelian(
+      data
+    );
 
 
     // ----------------------------------------------
@@ -603,17 +798,17 @@ window.hapusData =
       );
 
 
-      // Berhasil
-      hapusPendingDelete(id);
+      hapusPendingDelete(
+        id
+      );
 
 
     } catch (error) {
 
-      // Firebase gagal.
-      // Data lokal tetap sudah dihapus,
-      // tapi kita catat untuk dicoba lagi.
+      tambahPendingDelete(
+        id
+      );
 
-      tambahPendingDelete(id);
 
       console.log(
         "Penghapusan Firebase tertunda:",
@@ -624,11 +819,12 @@ window.hapusData =
 
 
     tampilStok();
+
     riwayat();
+
     ringkasan();
 
 
-    // Coba sync lagi
     sync();
 
   };
@@ -647,7 +843,9 @@ async function syncPendingDelete() {
   if (!pending.length) return;
 
 
-  for (let id of pending) {
+  for (
+    let id of pending
+  ) {
 
     try {
 
@@ -660,7 +858,9 @@ async function syncPendingDelete() {
       );
 
 
-      hapusPendingDelete(id);
+      hapusPendingDelete(
+        id
+      );
 
 
     } catch (error) {
@@ -678,29 +878,23 @@ async function syncPendingDelete() {
 
 
 // ======================================================
-// SIMPAN / SYNC FIREBASE
+// SYNC FIREBASE
 // ======================================================
 
 async function sync() {
 
   try {
 
-    // --------------------------------------------
-    // HAPUS DATA YANG TERTUNDA
-    // --------------------------------------------
-
     await syncPendingDelete();
 
-
-    // --------------------------------------------
-    // KIRIM DATA LOCAL KE FIREBASE
-    // --------------------------------------------
 
     let data =
       ambilPembelian();
 
 
-    for (let x of data) {
+    for (
+      let x of data
+    ) {
 
       if (!x.id) continue;
 
@@ -765,21 +959,23 @@ async function load() {
         x.data();
 
 
-      // Pastikan ID selalu ada
       if (!item.id) {
 
-        item.id = x.id;
+        item.id =
+          x.id;
 
       }
 
 
-      firebaseData.push(item);
+      firebaseData.push(
+        item
+      );
 
     });
 
 
     // --------------------------------------------
-    // DATA LOCAL
+    // LOCAL
     // --------------------------------------------
 
     let localData =
@@ -787,8 +983,7 @@ async function load() {
 
 
     // --------------------------------------------
-    // DATA YANG SUDAH DIHAPUS
-    // JANGAN DIHIDUPKAN LAGI
+    // PENDING DELETE
     // --------------------------------------------
 
     let pendingDelete =
@@ -805,12 +1000,13 @@ async function load() {
       new Map();
 
 
-    // Firebase dulu
     firebaseData.forEach(item => {
 
       if (
         item.id &&
-        !pendingDelete.has(item.id)
+        !pendingDelete.has(
+          item.id
+        )
       ) {
 
         gabungan.set(
@@ -823,13 +1019,13 @@ async function load() {
     });
 
 
-    // Local menimpa Firebase
-    // sehingga data lokal terbaru tidak hilang
     localData.forEach(item => {
 
       if (
         item.id &&
-        !pendingDelete.has(item.id)
+        !pendingDelete.has(
+          item.id
+        )
       ) {
 
         gabungan.set(
@@ -846,12 +1042,10 @@ async function load() {
       [...gabungan.values()];
 
 
-    simpanPembelian(hasil);
+    simpanPembelian(
+      hasil
+    );
 
-
-    // --------------------------------------------
-    // SETELAH MERGE, SYNC ULANG
-    // --------------------------------------------
 
     await sync();
 
@@ -889,6 +1083,7 @@ function validasiPembelian(
       "Pilih jenis ikan terlebih dahulu."
     );
 
+
     return false;
 
   }
@@ -903,6 +1098,7 @@ function validasiPembelian(
       "Masukkan jumlah uang yang valid."
     );
 
+
     return false;
 
   }
@@ -914,13 +1110,16 @@ function validasiPembelian(
       "Harga ikan belum ada."
     );
 
+
     return false;
 
   }
 
 
   let hargaBeli =
-    Number(harga.beli);
+    Number(
+      harga.beli
+    );
 
 
   if (
@@ -931,6 +1130,7 @@ function validasiPembelian(
     alert(
       "Harga beli ikan tidak valid."
     );
+
 
     return false;
 
@@ -984,7 +1184,9 @@ if (form) {
 
 
       let harga =
-        hargaTerakhir(jenis);
+        hargaTerakhir(
+          jenis
+        );
 
 
       // ------------------------------------------
@@ -1010,7 +1212,9 @@ if (form) {
 
       let berat =
         uang /
-        Number(harga.beli);
+        Number(
+          harga.beli
+        );
 
 
       if (
@@ -1022,30 +1226,44 @@ if (form) {
           "Berat pembelian tidak valid."
         );
 
+
         return;
 
       }
 
 
       // ------------------------------------------
-      // BUAT TRANSAKSI
+      // TRANSAKSI
       // ------------------------------------------
 
       let transaksi = {
 
-        id: buatID(),
+        id:
+          buatID(),
 
-        jenis: jenis,
+        jenis:
+          jenis
+            .trim()
+            .replace(
+              /\s+/g,
+              " "
+            ),
 
-        uang: uang,
+        uang:
+          uang,
 
-        berat: berat,
+        berat:
+          berat,
 
         hargaBeli:
-          Number(harga.beli),
+          Number(
+            harga.beli
+          ),
 
         hargaJual:
-          Number(harga.jual) || 0,
+          Number(
+            harga.jual
+          ) || 0,
 
         tanggal:
           tanggal()
@@ -1054,21 +1272,25 @@ if (form) {
 
 
       // ------------------------------------------
-      // SIMPAN LOCAL DULU
+      // LOCAL
       // ------------------------------------------
 
       let data =
         ambilPembelian();
 
 
-      data.push(transaksi);
+      data.push(
+        transaksi
+      );
 
 
-      simpanPembelian(data);
+      simpanPembelian(
+        data
+      );
 
 
       // ------------------------------------------
-      // TAMPILKAN SEGERA
+      // REFRESH
       // ------------------------------------------
 
       tampilStok();
@@ -1079,14 +1301,14 @@ if (form) {
 
 
       // ------------------------------------------
-      // RESET FORM
+      // RESET
       // ------------------------------------------
 
       e.target.reset();
 
 
       // ------------------------------------------
-      // SYNC FIREBASE
+      // FIREBASE
       // ------------------------------------------
 
       await sync();
@@ -1103,8 +1325,9 @@ if (form) {
 
 (async function () {
 
-  // Tampilkan data lokal dulu
-  // supaya aplikasi tidak kosong saat offline
+  // --------------------------------------------
+  // TAMPILKAN LOCAL DULU
+  // --------------------------------------------
 
   isiIkan();
 
@@ -1115,12 +1338,16 @@ if (form) {
   ringkasan();
 
 
-  // Kemudian coba ambil/sinkronkan Firebase
+  // --------------------------------------------
+  // LOAD FIREBASE
+  // --------------------------------------------
 
   await load();
 
 
-  // Refresh tampilan setelah sync
+  // --------------------------------------------
+  // REFRESH
+  // --------------------------------------------
 
   isiIkan();
 
